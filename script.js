@@ -1,6 +1,7 @@
 /*************************************************
  * VARIABLES GLOBALES
  *************************************************/
+const BACKEND_URL = "https://cielo-urbano-backend-production.up.railway.app";
 const locationDiv = document.getElementById("location");
 const resultCard = document.getElementById("result");
 const lightDiv = document.getElementById("light");
