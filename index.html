@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cielo Urbano</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<main class="container">
+  <h1>🌃 Cielo Urbano</h1>
+  <p class="subtitle">
+    Cuándo y dónde mirar el cielo desde tu ciudad
+  </p>
+
+  <div id="location">📍 Detectando ubicación…</div>
+
+<button
+  onclick="useFavoriteCity()"
+  style="
+    margin-top:8px;
+    background:#1d2450;
+    border:none;
+    color:#fff;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+  "
+>
+  ⭐ Usar ciudad favorita
+</button>
+
+
+  <div id="result" class="card">
+
+    <!-- 🌌 RESUMEN DE LA NOCHE -->
+    <div id="night-summary" class="event"></div>
+
+    <!-- 💡 CONTAMINACIÓN LUMÍNICA -->
+    <h2>💡 Contaminación lumínica</h2>
+    <p id="light"></p>
+
+    <div class="map-container">
+      <iframe
+        id="lightMap"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <a
+  class="map-link"
+  href="https://www.lightpollutionmap.info"
+  target="_blank"
+>
+  🌍 Ver mapa de contaminación lumínica
+</a>
+
+
+    <!-- 🌙 LUNA -->
+    <h2>🌙 Luna</h2>
+    <p id="moon"></p>
+
+    <!-- 👀 FILTRO -->
+
+    <!-- 🛰️ EEI -->
+    <h2>🛰️ Próximos pases de la EEI</h2>
+        <button id="toggle-visible">👀 Mostrar solo visibles</button>
+    <div id="iss-calendar"></div>
+
+    <!-- 📅 EVENTOS -->
+    <h2>📅 Eventos astronómicos</h2>
+    <div id="events"></div>
+
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

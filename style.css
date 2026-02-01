@@ -1,0 +1,564 @@
+/* === BASE === */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0b0f1a;
+  color: #e6e6e6;
+  margin: 0;
+  padding: 0;
+}
+
+#result {
+  max-width: 700px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* === BLOQUES === */
+.event {
+  background: #151a2d;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  line-height: 1.45;
+}
+
+/* === JERARQUÍA === */
+.event strong {
+  font-size: 1.05rem;
+}
+
+#location {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+#moon, #light {
+  opacity: 0.9;
+}
+
+/* === SCORE === */
+.event:first-child {
+  background: linear-gradient(135deg, #1d2450, #2b3a8f);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.event:first-child strong {
+  font-size: 1.2rem;
+}
+
+/* === EEI === */
+#iss-calendar .event {
+  border-left: 4px solid #4dd0e1;
+}
+
+/* === EVENTOS === */
+#events .event {
+  border-left: 4px solid #ffb74d;
+}
+
+/* === STARLINK === */
+#events .event strong:contains("Starlink") {
+  color: #90caf9;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  .event {
+    padding: 12px;
+  }
+}
+/* =========================
+   ETIQUETAS TEMPORALES
+   ========================= */
+
+/* Simula etiqueta "HOY" */
+#iss-calendar .event:first-of-type::before {
+  content: "HOY";
+  display: inline-block;
+  background: #4caf50;
+  color: #0b0f1a;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+
+/* Simula etiqueta "PRÓXIMO" */
+#events .event::before {
+  content: "PRÓXIMO";
+  display: inline-block;
+  background: #ffb74d;
+  color: #0b0f1a;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+
+/* =========================
+   VISIBILIDAD (COLORES)
+   ========================= */
+
+/* Visible */
+.event:has(:contains("Visible")) {
+  border-left-color: #4caf50 !important;
+}
+
+/* No visible */
+.event:has(:contains("No visible")) {
+  border-left-color: #ef5350 !important;
+}
+
+/* Texto visible */
+.event:has(:contains("Visible")) {
+  box-shadow: 0 0 0 1px rgba(76,175,80,0.15);
+}
+
+/* Texto no visible */
+.event:has(:contains("No visible")) {
+  opacity: 0.85;
+}
+
+/* =========================
+   MICRO-MEJORAS
+   ========================= */
+
+.event br {
+  margin-bottom: 4px;
+}
+
+.event:hover {
+  transform: translateY(-1px);
+  transition: transform 0.15s ease;
+}
+#toggle-visible {
+  background: #1d2450;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+#toggle-visible:hover {
+  background: #2b3a8f;
+}
+
+.map-container {
+  width: 100%;
+  height: 300px;
+  margin: 12px 0;
+}
+
+#lightMap {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+/* MAPA: comportamiento en móvil */
+@media (max-width: 768px) {
+  .map-container {
+    display: none;
+  }
+
+  .map-link {
+    display: block;
+    margin: 12px 0;
+    padding: 10px 14px;
+    background: #1d2450;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+}
+/* =========================
+   MAPA CONTAMINACIÓN LUMÍNICA
+   ========================= */
+
+/* Escritorio: mostrar mapa */
+.map-container {
+  width: 100%;
+  height: 320px;
+  margin: 12px 0;
+  display: block;
+}
+
+#lightMap {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Enlace oculto en escritorio */
+.map-link {
+  display: none;
+}
+
+/* =========================
+   MÓVIL
+   ========================= */
+@media (max-width: 768px) {
+  /* Ocultar iframe en móvil */
+  .map-container {
+    display: none;
+  }
+
+  /* Mostrar enlace solo en móvil */
+  .map-link {
+    display: block;
+    margin: 12px 0;
+    padding: 10px 14px;
+    background: #1d2450;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+}
+/* =========================
+   MOBILE-FIRST UX
+   ========================= */
+
+@media (max-width: 768px) {
+
+  /* Resumen siempre visible */
+  #night-summary {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #0b0f1a;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Botones más grandes (pulgar-friendly) */
+  button {
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+
+  /* Mejor separación entre bloques */
+  .event {
+    margin-bottom: 16px;
+  }
+
+  /* Texto un poco más grande */
+  body {
+    font-size: 16px;
+  }
+}
+/* =========================
+   CONTENEDOR PRINCIPAL
+   ========================= */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+h1, .subtitle, #location {
+  text-align: center;
+}
+button {
+  display: block;
+  margin: 10px auto;
+}
+/* =========================
+   CONTENEDOR PRINCIPAL
+   ========================= */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* =========================
+   CABECERA
+   ========================= */
+
+h1 {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  text-align: center;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+#location {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Botón ciudad favorita */
+button {
+  display: block;
+  margin: 10px auto;
+  background: #1d2450;
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   SECCIONES
+   ========================= */
+
+h2 {
+  margin-top: 28px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 6px;
+}
+
+/* =========================
+   TARJETAS / EVENTOS
+   ========================= */
+
+.event {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+/* Botón dentro de tarjetas */
+.event button {
+  margin: 8px 0 0 0;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+/* =========================
+   RESUMEN DE LA NOCHE
+   ========================= */
+
+#night-summary {
+  background: linear-gradient(135deg, #1d2450, #0b0f1a);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* =========================
+   MAPA
+   ========================= */
+
+.map-container {
+  width: 100%;
+  height: 320px;
+  margin: 12px 0;
+}
+
+#lightMap {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Enlace mapa (oculto por defecto) */
+.map-link {
+  display: none;
+}
+
+/* =========================
+   MÓVIL
+   ========================= */
+
+@media (max-width: 768px) {
+
+  body {
+    font-size: 16px;
+  }
+
+  #night-summary {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  /* Ocultar iframe en móvil */
+  .map-container {
+    display: none;
+  }
+
+  /* Mostrar enlace en móvil */
+  .map-link {
+    display: block;
+    margin: 12px 0;
+    padding: 10px 14px;
+    background: #1d2450;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+}
+/* =========================
+   SCORE DE LA NOCHE
+   ========================= */
+
+.score-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.score-stars {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.star {
+  margin-right: 2px;
+}
+
+.star.active {
+  color: #ffd54f; /* amarillo */
+  text-shadow: 0 0 4px rgba(255, 213, 79, 0.6);
+}
+
+.star.inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
+/* =========================
+   TOOLTIP SCORE
+   ========================= */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 220px;
+  background: rgba(20, 24, 45, 0.95);
+  color: #fff;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease;
+  z-index: 50;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* Flechita */
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(20, 24, 45, 0.95) transparent transparent transparent;
+}
+
+/* Mostrar tooltip */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+/* =========================
+   SEPARACIÓN DE SECCIONES
+   ========================= */
+
+/* Cada bloque principal respira */
+h2 {
+  margin-top: 40px;
+  margin-bottom: 14px;
+}
+
+/* Tarjetas (eventos, EEI, etc.) */
+.event {
+  margin-bottom: 18px;
+}
+
+/* Contaminación lumínica */
+#light {
+  margin-bottom: 10px;
+}
+
+/* Mapa / enlace */
+.map-container,
+.map-link {
+  margin-bottom: 24px;
+}
+
+/* Bloque Luna */
+#moon {
+  margin-bottom: 18px;
+}
+
+/* EEI */
+#iss-calendar {
+  margin-top: 12px;
+}
+
+/* Eventos astronómicos */
+#events {
+  margin-top: 12px;
+}
+
+/* =========================
+   BLOQUES DESTACADOS
+   ========================= */
+
+/* Contaminación lumínica y Luna como bloques suaves */
+#light,
+#moon {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+/* Sección EEI y Eventos con fondo ligero */
+#iss-calendar,
+#events {
+  padding-top: 6px;
+}
+
+/* =========================
+   MÓVIL
+   ========================= */
+
+@media (max-width: 768px) {
+
+  h2 {
+    margin-top: 32px;
+  }
+
+  .event {
+    margin-bottom: 16px;
+  }
+}
+
